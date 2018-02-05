@@ -40,18 +40,24 @@ function showImage(image) {
 }
 
 function nextImage() {
+    let img2 = $('#imageContainer').children().first();
+    // console.log(img2);
     // console.log('nextImage');
     // let image = $( 'imageContainer').next();
     let image = globalImage.next();
-    console.log(image.length);
-    if (image.length == 0) {
-        console.log('nolla');
-        
-    }
     console.log(image);
+    // console.log(image.length);
+    if (image.length === 0) {
+        console.log('nolla');
+        // let image = $( 'img').first();
+        // let image = $(' #imageContainer').children().last();
+        let image = globalImage.prev();
+        prevImage();
+        console.log(image);
+    }
     // console.log(image);
     // console.log(imageContainer);
-     showImage(image);
+    showImage(image);
 }
 
 function prevImage() {
