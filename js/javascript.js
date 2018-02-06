@@ -1,75 +1,51 @@
-// let imageContainer = $('#imageContainer');
+/* global $ */
+
+let imageContainer = $('#imageContainer');
+let currentImage;
 
 function addImage(url) {
-    // Create a HTML element using jQuery and store it in a variable
-    let element = $('<div />', {
-        id: 'myDiv',
-    });
-    // ... then you can manipulate element using jQuery
-    element.text('Hello World!');
-
     imageContainer = $('#imageContainer');
-    // console.log(imageContainer);
 
     let image = $('<img />', {
         src: url,
         });
-        // .appendTo($(imageContainer));
     imageContainer.append(image);
-    // console.log(imageContainer);
-    // console.log(image);
-    // console.log(image);
+
     // Using the "is" method we can ask if the image is the first one
     if (image.is(':first-child')) {
-        globalImage = image;
+        currentImage = image;
     } else {
         image.hide();
     }
-    // ...is method returns true or false so it can be used in a if clause
 
     return image;
 }
 
 function showImage(image) {
-    // console.log(image);
-    globalImage.hide();
-    // console.log(globalImage);
-    // console.log(globalImage);
-    globalImage = image;
+    currentImage.hide();
+    currentImage = image;
     image.show();
 }
 
 function nextImage() {
-    let img2 = $('#imageContainer').children().first();
-    // console.log(img2);
-    // console.log('nextImage');
-    // let image = $( 'imageContainer').next();
-    let image = globalImage.next();
-    console.log(image);
-    // console.log(image.length);
-    if (image.length === 0) {
-        console.log('nolla');
-        // let image = $( 'img').first();
-        // let image = $(' #imageContainer').children().last();
-        let image = globalImage.prev();
-        prevImage();
-        console.log(image);
+    let image = currentImage.next();
+    if (image.length == 0) {
+        image = $(' #imageContainer').children().first();
     }
-    // console.log(image);
-    // console.log(imageContainer);
     showImage(image);
 }
 
 function prevImage() {
-    let image = globalImage.prev();
+    let image = currentImage.prev();
+    if (image.length == 0) {
+        image = $(' #imageContainer').children().last();
+    }
     showImage(image);
 }
 
-let img1 = addImage('http://placekitten.com/200/301');
-let img2 = addImage('http://placekitten.com/300/302');
-let img3 = addImage('http://placekitten.com/280/280');
-
-showImage(img1);
+addImage('http://placekitten.com/200/301');
+addImage('http://placekitten.com/300/302');
+addImage('http://placekitten.com/280/280');
 
  $('#nextCat').click(function() {
     nextImage();
